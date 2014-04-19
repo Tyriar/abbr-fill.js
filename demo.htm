@@ -1,0 +1,109 @@
+<html>
+<head>
+<style>
+abbr[title] { 
+  background-color:red;
+}
+</style>
+</head>
+<body>
+
+<article>
+<div class="masthead"><div class="wrapper"><header>
+<h1 itemprop="name"><a href="http://www.growingwiththeweb.com/2014/03/xml-sitemaps.html">XML sitemaps</a></h1> <time class="date" datetime="2014-03-03 00:00:00 -0800">Monday, 3 March 2014</time>
+<div class="wrapper">
+<div class="inner-wrapper">
+<figure class="post-image right-col"><img alt="A collection of linked nodes" src="http://www.growingwiththeweb.com/images/2014/03/03/sitemap.svg"> </figure>
+<h2 id="what_is_an_xml_sitemap">What is an XML sitemap?</h2>
+<p>An <a href="http://www.sitemaps.org/">XML sitemap</a> is a file that helps better inform search engines about how to crawl and index a web site. Google, Yahoo! and Bing all recommend the use of an XML sitemap to improve crawling.</p>
+<p>This article looks at the current version of the <a href="http://www.sitemaps.org/protocol.html">sitemap protocol</a>, 0.90.</p>
+<h2 id="why_are_they_useful">Why are they useful?</h2>
+<p>Search engines will naturally crawl a web site and index its pages, but it’s difficult for search engines to guess everything about a particular page. Providing a formal XML sitemap helps define these details that machines can’t easily determine.</p>
+<p>The primary value add is in the ability to specify a priority against a URL. This <strong>will not</strong> change the search rankings of the pages against external sites, it does however use this information to rank the importance of pages internally. For example on my blog I use the lowest priority for <a href="/page2/index.html">index pages past the first one</a>, my shorter posts are in the middle while <a href="/">home</a> and <a href="/p/top-articles.html">top articles</a> are the highest. This ensures that the best quality, most relevant articles will be presented higher in search results than the lesser ranked pages.</p>
+<p>A URL’s approximate change frequency and last modified date can also be specified. These are just hints though and may not increase or reduce the frequency in which a page is crawled.</p>
+<p>The sitemap protocol also supports splitting a sitemap up into multiple sitemaps, with a single ‘master’ sitemap pointing to each of the sub-sitemaps.</p>
+<h2 id="then_what_about_html_sitemaps">Then what about HTML sitemaps?</h2>
+<p>Just because you have an XML sitemap does not mean that you shouldn’t have a HTML sitemap too since they’re targetted at different audiences; XML sitemaps are for web crawlers and HTML sitemaps are for users. <a href="http://www.w3.org/TR/WCAG20-TECHS/G63">HTML sitemaps</a> provide an overview of the entire site, help users understand how the content is organised and provide an alternative way to navigate it. This can help fulfill <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.0 Level AA:</p>
+<blockquote>
+<p><strong>2.4.5 Multiple Ways:</strong> More than one way is available to locate a Web page within a set of Web pages except where the Web Page is the result of, or a step in, a process. (Level AA)</p>
+<p><a href="http://www.w3.org/TR/2008/REC-WCAG20-20081211/#navigation-mechanisms-mult-loc"><cite><abbr title="World Wide Web Consortium">W3C</abbr></cite> - WCAG 2.0</a></p>
+</blockquote>
+<h2 id="xml_tag_definitions">XML tag definitions</h2>
+<h3 id="xml_sitemap">XML sitemap</h3>
+<table><thead><tr><th>Attribute</th><th>Description</th></tr></thead><tbody><tr><td style="text-align: left;"><code>&lt;urlset&gt;</code></td><td style="text-align: left;"><em>Required</em> - Wrapping element that references the current protocol.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;url&gt;</code></td><td style="text-align: left;"><em>Required</em> - Parent tag for each URL entry.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;loc&gt;</code></td><td style="text-align: left;"><em>Required</em> - URL of the page. It must contain the protocol (such as http) and end with a trailing slash, if your web server requires it. This value must be less than 2,048 characters.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;lastmod&gt;</code></td><td style="text-align: left;"><em>Optional</em> - Date of last modification of the file. This date should be in W3C Datetime format, such as <code>YYYY-MM-DD</code>.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;changefreq&gt;</code></td><td style="text-align: left;"><em>Optional</em> - How frequently the page is likely to change. Valid values are: <ul><li><code>always</code></li><li><code>hourly</code></li><li><code>daily</code></li><li><code>weekly</code></li><li><code>monthly</code></li><li><code>yearly</code></li><li><code>never</code></li></ul></td></tr>
+<tr><td style="text-align: left;"><code>&lt;priority&gt;</code></td><td style="text-align: left;"><em>Optional</em> - The priority of this URL relative to other URLs on your site. Valid values range from <code>0.0</code> to <code>1.0</code> (default <code>0.5</code>).</td></tr>
+</tbody></table>
+<h3 id="xml_sitemap_index">XML sitemap index</h3>
+<table><thead><tr><th>Attribute</th><th>Description</th></tr></thead><tbody><tr><td style="text-align: left;"><code>&lt;sitemapindex&gt;</code></td><td style="text-align: left;"><em>Required</em> - Wrapping element containing about all of the sitemaps in the file.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;sitemap&gt;</code></td><td style="text-align: left;"><em>Required</em> - Parent tag for a sitemap entry.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;loc&gt;</code></td><td style="text-align: left;"><em>Required</em> - URL of the sitemap. This can be a sitemap, an Atom file, RSS file or simple text file.</td></tr>
+<tr><td style="text-align: left;"><code>&lt;lastmod&gt;</code></td><td style="text-align: left;"><em>Optional</em> - Identifies the time that the corresponding Sitemap file was modified. This date should be in W3C Datetime format, such as <code>YYYY-MM-DD</code>.</td></tr>
+</tbody></table>
+<h2 id="example">Example</h2>
+<p>A good example is <a href="http://www.google.com/sitemap.xml">Google’s own (enormous) sitemap</a>. As a simple example, here is an excerpt from <a href="http://www.growingwiththeweb.com/sitemap.xml">my sitemap</a>:</p>
+<pre class="prettyprint prettyprinted" style=""><code>&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;!-- Home --&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.growingwiththeweb.com/index.html&lt;/loc&gt;  
+    &lt;priority&gt;1.0&lt;/priority&gt;
+    &lt;changefreq&gt;daily&lt;/changefreq&gt;    
+  &lt;/url&gt;
+  &lt;!-- A regular post --&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.growingwiththeweb.com/2014/03/given-random5-implement-random7.html&lt;/loc&gt;  
+    &lt;priority&gt;0.5&lt;/priority&gt;    
+  &lt;/url&gt;
+  &lt;!-- A 'top' post --&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.growingwiththeweb.com/2014/02/a-gentle-introduction-to-git.html&lt;/loc&gt;
+    &lt;priority&gt;1.0&lt;/priority&gt;
+  &lt;/url&gt;
+  &lt;!-- An older post index page --&gt;
+  &lt;url&gt;
+    &lt;loc&gt;http://www.growingwiththeweb.com/page2/index.html&lt;/loc&gt; 
+    &lt;priority&gt;0.1&lt;/priority&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</code></pre>
+<p>And this is the example sitemap index from the official <a href="http://www.sitemaps.org/protocol.html#index">sitemap protocol page</a>.</p>
+<pre class="prettyprint prettyprinted" style=""><code>&lt;sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;http://www.example.com/sitemap1.xml.gz&lt;/loc&gt;
+    &lt;lastmod&gt;2004-10-01T18:23:17+00:00&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+  &lt;sitemap&gt;
+    &lt;loc&gt;http://www.example.com/sitemap2.xml.gz&lt;/loc&gt;
+    &lt;lastmod&gt;2005-01-01&lt;/lastmod&gt;
+  &lt;/sitemap&gt;
+&lt;/sitemapindex&gt;</code></pre>
+<h2 id="submitting_the_sitemap">Submitting the sitemap</h2>
+<p>Once your sitemap is complete it can be submitted it to Google with the <a href="https://www.google.com/webmasters/tools/home">Google Webmaster Tools</a> and Bing/Yahoo! through the <a href="http://www.bing.com/toolbox/webmaster/">Bing Webmaster Tools</a>. After parsing is complete, you will be informed of any problems with the sitemap.</p>
+</div>
+</div>
+</article>
+
+<script src="abbr-fill.js"></script>
+<script>
+abbrFill({
+  // executes the script for each element matching the selector 
+  'selector': 'article', 
+  // Only consider these tags within the primary selector, this is for performance reasons
+  //'innerSelector': 'p, ul, h1, h2, h3, h4, h5, h6, td',
+  // optional - only wrap the first occurrence of each term (default true) 
+  //'firstTermOnly': true, 
+  'terms': {
+    'XML': 'Extensible Markup Language',
+    'HTML': 'HyperText Markup Language',
+    'SEO': 'Search Engine Optimisation',
+    'WCAG': 'Web Content Accessibility Guidelines',
+    'W3C': 'World Wide Web Consortium',
+    'URL': 'Uniform Resource Locator',
+    'URLs': 'Uniform Resource Locators'
+  }
+});
+</script>
+</body>
+</html>
