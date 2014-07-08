@@ -14,13 +14,26 @@ module.exports = function(grunt) {
           ]
         }
       }
+    },
+    jasmine: {
+      test: {
+        src: 'abbr-fill.js',
+        options: {
+          specs: 'test/*spec.js'
+        }
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('dist', [
     'uglify:dist'
+  ]);
+
+  grunt.registerTask('test', [
+    'jasmine:test'
   ]);
 
   grunt.registerTask('default', [
