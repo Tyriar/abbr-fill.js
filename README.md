@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/Tyriar/abbr-fill.js.svg?branch=master)](https://travis-ci.org/Tyriar/abbr-fill.js)
 [![Code Climate](https://codeclimate.com/github/Tyriar/abbr-fill.js.png)](https://codeclimate.com/github/Tyriar/abbr-fill.js)
-[![Test Coverage](https://codeclimate.com/github/Tyriar/coverage/abbr-fill.js.png)](https://codeclimate.com/github/Tyriar/abbr-fill.js)
 
 A JavaScript library that wraps acronyms/abbreviations in `<abbr>` tags with their relevant `title` attributes.
 
