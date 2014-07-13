@@ -21,3 +21,11 @@ A JavaScript library that wraps acronyms/abbreviations in `<abbr>` tags with the
         'URLs': 'Uniform Resource Locators'
       }
     });
+
+## See also
+
+- [abbr-touch.js][1]
+
+
+
+  [1]: https://github.com/Tyriar/abbr-touch.js 
