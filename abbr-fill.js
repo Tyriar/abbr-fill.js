@@ -32,8 +32,8 @@ var abbrFill = (function () {
 
   function wrapElement(node, match, offset) {
     if (node.parentNode.tagName.toLowerCase() === 'abbr') {
-      // The element has already been wrapped, just add the text back as it was
-      // removed by the regex
+      // The element has already either already been wrapped or existed without
+      // the script, just add the text back as it was removed by the regex
       node.data = match;
       return;
     }
