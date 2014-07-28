@@ -91,7 +91,7 @@ describe('tags', function () {
     expect(abbr[0].title).toBe('bar');
   });
 
-  it('should not match terms with following "," characters', function () {
+  it('should not match following "," characters', function () {
     contentDiv.innerHTML = 'test FOO, test';
     abbrFill({
       'selector': 'div',
@@ -104,7 +104,7 @@ describe('tags', function () {
     expect(abbr[0].title).toBe('bar');
   });
 
-  it('should not match terms with following "." characters', function () {
+  it('should not match following "." characters', function () {
     contentDiv.innerHTML = 'test FOO. Test';
     abbrFill({
       'selector': 'div',
@@ -114,6 +114,32 @@ describe('tags', function () {
     var abbr = document.querySelectorAll('abbr');
     expect(abbr.length).toBe(1);
     expect(abbr[0].innerHTML).toBe('FOO');
+    expect(abbr[0].title).toBe('bar');
+  });
+
+  it('should not trim "." on terms that end in "."', function () {
+    contentDiv.innerHTML = 'test F.O.O. test';
+    abbrFill({
+      'selector': 'div',
+      'terms': { 'F.O.O.': 'bar' }
+    });
+
+    var abbr = document.querySelectorAll('abbr');
+    expect(abbr.length).toBe(1);
+    expect(abbr[0].innerHTML).toBe('F.O.O.');
+    expect(abbr[0].title).toBe('bar');
+  });
+
+  it('should not match a following "," characters on terms that end in "."', function () {
+    contentDiv.innerHTML = 'test F.O.O., Test';
+    abbrFill({
+      'selector': 'div',
+      'terms': { 'F.O.O.': 'bar' }
+    });
+
+    var abbr = document.querySelectorAll('abbr');
+    expect(abbr.length).toBe(1);
+    expect(abbr[0].innerHTML).toBe('F.O.O.');
     expect(abbr[0].title).toBe('bar');
   });
 });

@@ -40,6 +40,12 @@ var abbrFill = (function () {
     }
     // Create the new element
     var trimmedMatch = match.trim();
+    // BUG: This will trim any abbr's that actually end in '.' eg. "A.B.C."
+    var lastChar = trimmedMatch[trimmedMatch.length - 1];
+    if (lastChar === '.' || lastChar === ',') {
+      trimmedMatch = trimmedMatch.substring(0, trimmedMatch.length - 1);
+      node.nextSibling.data = lastChar + node.nextSibling.data;
+    }
     var newElem = document.createElement('abbr');
     newElem.innerHTML = trimmedMatch;
     newElem.title = config.terms[trimmedMatch];
