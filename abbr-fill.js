@@ -39,16 +39,26 @@ var abbrFill = (function () {
       node.nextSibling.data = ' ' + node.nextSibling.data;
     }
     // Create the new element
-    var trimmedMatch = match.trim();
-    // BUG: This will trim any abbr's that actually end in '.' eg. "A.B.C."
-    var lastChar = trimmedMatch[trimmedMatch.length - 1];
+    var matchText = match.trim();
+
+    var lastChar = matchText[matchText.length - 1];
     if (lastChar === '.' || lastChar === ',') {
-      trimmedMatch = trimmedMatch.substring(0, trimmedMatch.length - 1);
-      node.nextSibling.data = lastChar + node.nextSibling.data;
+      var trimmedEnd = matchText.substring(0, matchText.length - 1);
+      // only use if the term exists without the '.' or ',' at the end
+      if (trimmedEnd in config.terms) {
+        matchText = trimmedEnd;
+        node.nextSibling.data = lastChar + node.nextSibling.data;
+      }
     }
+
+    if (!(matchText in config.terms)) {
+      throw 'Unexpected error: The text "' + matchText +
+          ' didn\'t match any terms';
+    }
+
     var newElem = document.createElement('abbr');
-    newElem.innerHTML = trimmedMatch;
-    newElem.title = config.terms[trimmedMatch];
+    newElem.innerHTML = matchText;
+    newElem.title = config.terms[matchText];
     node.parentNode.insertBefore(newElem, node.nextSibling);
   }
 
