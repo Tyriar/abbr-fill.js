@@ -31,11 +31,18 @@ var abbrFill = (function () {
   }
 
   function wrapElement(node, match, offset) {
+    if (node.parentNode.tagName.toLowerCase() === 'abbr') {
+      // The element has already been wrapped, just add the text back as it was
+      // removed by the regex
+      node.data = match;
+      return;
+    }
+
     // First add the surrounding spaces matched with the regex back
     if (match[0] === ' ') {
       node.data += ' ';
     }
-    if (match.length > 0 && match[match.length-1] === ' ') {
+    if (match.length > 0 && match[match.length - 1] === ' ') {
       node.nextSibling.data = ' ' + node.nextSibling.data;
     }
     // Create the new element
