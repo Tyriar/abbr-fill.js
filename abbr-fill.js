@@ -1,11 +1,14 @@
 /*! abbr-fill | (c) 2014 Daniel Imms | github.com/Tyriar/abbr-fill/blob/master/LICENSE */
 
-abbrFill = (function () {
+var abbrFill = (function () {
+  'use strict';
+
   var config;
 
   function init (configuration) {
-    if (!configuration || !configuration.terms || !configuration.selector)
+    if (!configuration || !configuration.terms || !configuration.selector) {
       return;
+    }
 
     config = configuration;
 
@@ -17,23 +20,27 @@ abbrFill = (function () {
 
   function applyAbbrs(node) {
     for (var term in config.terms) {
-      // This will only match the first instance if there are two instances of
-      // the term separated by a space. This is an unlikely scenario and
-      // probably also not desired behaviour.
-      matchText(node, new RegExp("(^|\\s)" + term + "($|\\s|\\.|,)", "g"),
-          wrapElement);
+      if (config.terms.hasOwnProperty(term)) {
+        // This will only match the first instance if there are two instances of
+        // the term separated by a space. This is an unlikely scenario and
+        // probably also not desired behaviour.
+        matchText(node, new RegExp('(^|\\s)' + term + '($|\\s|\\.|,)', 'g'),
+            wrapElement);
+      }
     }
   }
 
   function wrapElement(node, match, offset) {
     // First add the surrounding spaces matched with the regex back
-    if (match[0] === ' ')
+    if (match[0] === ' ') {
       node.data += ' ';
-    if (match.length > 0 && match[match.length-1] === ' ')
+    }
+    if (match.length > 0 && match[match.length-1] === ' ') {
       node.nextSibling.data = ' ' + node.nextSibling.data;
+    }
     // Create the new element
     var trimmedMatch = match.trim();
-    var newElem = document.createElement("abbr");
+    var newElem = document.createElement('abbr');
     newElem.innerHTML = trimmedMatch;
     newElem.title = config.terms[trimmedMatch];
     node.parentNode.insertBefore(newElem, node.nextSibling);
@@ -46,8 +53,9 @@ abbrFill = (function () {
     var child = node.firstChild;
 
     // Required for <img>
-    if (!child)
+    if (!child) {
       return node;
+    }
 
     var replaceFunction = function(match) {
       var args = [].slice.call(arguments),
