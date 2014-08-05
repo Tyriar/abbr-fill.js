@@ -1,4 +1,4 @@
-/*! abbr-fill | (c) 2014 Daniel Imms | github.com/Tyriar/abbr-fill/blob/master/LICENSE */
+/*! abbr-fill.js | (c) 2014 Daniel Imms | github.com/Tyriar/abbr-fill.js/blob/master/LICENSE */
 
 var abbrFill = (function () {
   'use strict';
@@ -22,8 +22,9 @@ var abbrFill = (function () {
     for (var term in config.terms) {
       if (config.terms.hasOwnProperty(term)) {
         // This will only match the first instance if there are two instances of
-        // the term separated by a space. This is an unlikely scenario and
-        // probably also not desired behaviour.
+        // the term separated by a space. Since it is quite an unlikely scenario
+        // and probably not desirable to wrap both anyway it's allowed.
+        // For example: "ABC ABC" -> "<abbr title="...">ABC</abbr> ABC
         matchText(node, new RegExp('(^|\\s)' + term + '($|\\s|\\.|,)', 'g'),
             wrapElement);
       }
