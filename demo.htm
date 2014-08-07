@@ -1,14 +1,16 @@
 <html>
 <head>
-<style>
-abbr[title] { 
-  background-color:red;
-}
-</style>
+  <meta charset="utf-8">
+  <style>
+    abbr[title] {
+      background-color:red;
+    }
+  </style>
 </head>
 <body>
-
 <article>
+  <p>XML test one two thee XML test one two three</p>
+
 <div class="masthead"><div class="wrapper"><header>
 <h1 itemprop="name"><a href="http://www.growingwiththeweb.com/2014/03/xml-sitemaps.html">XML sitemaps</a></h1> <time class="date" datetime="2014-03-03 00:00:00 -0800">Monday, 3 March 2014</time>
 <div class="wrapper">
@@ -48,14 +50,14 @@ abbr[title] {
 <pre class="prettyprint prettyprinted" style=""><code>&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
   &lt;!-- Home --&gt;
   &lt;url&gt;
-    &lt;loc&gt;http://www.growingwiththeweb.com/index.html&lt;/loc&gt;  
+    &lt;loc&gt;http://www.growingwiththeweb.com/index.html&lt;/loc&gt;
     &lt;priority&gt;1.0&lt;/priority&gt;
-    &lt;changefreq&gt;daily&lt;/changefreq&gt;    
+    &lt;changefreq&gt;daily&lt;/changefreq&gt;
   &lt;/url&gt;
   &lt;!-- A regular post --&gt;
   &lt;url&gt;
-    &lt;loc&gt;http://www.growingwiththeweb.com/2014/03/given-random5-implement-random7.html&lt;/loc&gt;  
-    &lt;priority&gt;0.5&lt;/priority&gt;    
+    &lt;loc&gt;http://www.growingwiththeweb.com/2014/03/given-random5-implement-random7.html&lt;/loc&gt;
+    &lt;priority&gt;0.5&lt;/priority&gt;
   &lt;/url&gt;
   &lt;!-- A 'top' post --&gt;
   &lt;url&gt;
@@ -64,7 +66,7 @@ abbr[title] {
   &lt;/url&gt;
   &lt;!-- An older post index page --&gt;
   &lt;url&gt;
-    &lt;loc&gt;http://www.growingwiththeweb.com/page2/index.html&lt;/loc&gt; 
+    &lt;loc&gt;http://www.growingwiththeweb.com/page2/index.html&lt;/loc&gt;
     &lt;priority&gt;0.1&lt;/priority&gt;
   &lt;/url&gt;
 &lt;/urlset&gt;</code></pre>
@@ -85,15 +87,16 @@ abbr[title] {
 </div>
 </article>
 
+<script src="find-and-wrap.js"></script>
 <script src="abbr-fill.js"></script>
 <script>
 abbrFill({
-  // executes the script for each element matching the selector 
-  'selector': 'article', 
+  // executes the script for each element matching the selector
+  'selector': 'article',
   // Only consider these tags within the primary selector, this is for performance reasons
   //'innerSelector': 'p, ul, h1, h2, h3, h4, h5, h6, td',
-  // optional - only wrap the first occurrence of each term (default true) 
-  //'firstTermOnly': true, 
+  // optional - only wrap the first occurrence of each term (default true)
+  //'firstTermOnly': true,
   'terms': {
     'XML': 'Extensible Markup Language',
     'HTML': 'HyperText Markup Language',
