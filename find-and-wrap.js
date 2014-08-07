@@ -1,15 +1,17 @@
 /*! find-and-wrap.js | (c) 2014 Daniel Imms | github.com/Tyriar/abbr-fill/blob/master/LICENSE */
 
 var findAndWrap = (function () {
+  'use strict';
 
   function execute(container, term, wrappingTagName) {
     wrappingTagName = wrappingTagName.toLowerCase();
     return matchText(container,
+                     term,
                      new RegExp('(^|\\s)' + term + '($|\\s|\\.|,)', 'g'),
                      wrappingTagName);
   }
 
-  function matchText(node, regex, wrappingTagName) {
+  function matchText(node, term, regex, wrappingTagName) {
     var excludeElements = ['script', 'style', 'iframe', 'canvas'];
     var child = node.firstChild;
     var elements = [];
@@ -25,7 +27,7 @@ var findAndWrap = (function () {
       var newTextNode = child.splitText(offset);
       newTextNode.data = newTextNode.data.substr(match.length);
       var newElement = wrapElement.apply(
-          window, [child, wrappingTagName].concat(args));
+          window, [child, term, wrappingTagName].concat(args));
       if (newElement) {
         elements = elements.concat(newElement);
       }
@@ -38,7 +40,8 @@ var findAndWrap = (function () {
         if (excludeElements.indexOf(child.tagName.toLowerCase()) > -1) {
           continue;
         }
-        elements = elements.concat(matchText(child, regex, wrappingTagName));
+        elements = elements.concat(
+            matchText(child, term, regex, wrappingTagName));
         break;
       case 3: // text node
         child.data.replace(regex, replaceFunction);
@@ -50,7 +53,7 @@ var findAndWrap = (function () {
     return elements;
   }
 
-  function wrapElement(node, wrappingTagName, match, offset) {
+  function wrapElement(node, term, wrappingTagName, match, offset) {
     // TODO: Pull non-generic logic from here into abbr-fill.js
     if (node.parentNode.tagName.toLowerCase() === wrappingTagName) {
       // The element has either already been wrapped or existed without the
@@ -73,16 +76,16 @@ var findAndWrap = (function () {
     if (lastChar === '.' || lastChar === ',') {
       var trimmedEnd = matchText.substring(0, matchText.length - 1);
       // only use if the term exists without the '.' or ',' at the end
-      //if (trimmedEnd in config.terms) {
+      if (trimmedEnd === term) {
         matchText = trimmedEnd;
         node.nextSibling.data = lastChar + node.nextSibling.data;
-      //}
+      }
     }
 
-    /*if (!(matchText in config.terms)) {
+    if (matchText !== term) {
       throw 'Unexpected error: The text "' + matchText +
-          ' didn\'t match any terms';
-    }*/
+          ' didn\'t match the term "' + term + '"';
+    }
 
     var newElem = document.createElement(wrappingTagName);
     newElem.innerHTML = matchText;

@@ -34,6 +34,7 @@ var abbrFill = (function () {
           continue;
         }
 
+
         for (var i = 0; i < abbrs.length; i++) {
           abbrs[i].title = config.terms[term];
         }
