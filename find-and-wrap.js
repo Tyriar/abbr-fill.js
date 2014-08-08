@@ -16,7 +16,7 @@ var findAndWrap = (function () {
     var child = node.firstChild;
     var elements = [];
 
-    // Required for <img>
+    // Required for <img>, <hr>
     if (!child) {
       return elements;
     }

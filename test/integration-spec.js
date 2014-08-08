@@ -26,7 +26,7 @@ describe('tags', function () {
   });
 
   it('should match terms immediately before opening tags', function () {
-    contentDiv.innerHTML = 'my FOO<div>test</div>';
+    contentDiv.innerHTML = 'my FOO<span>test</span>';
     abbrFill({
       'selector': 'div',
       'terms': { 'FOO': 'bar' }
@@ -39,7 +39,7 @@ describe('tags', function () {
   });
 
   it('should match terms immediately after closing tags', function () {
-    contentDiv.innerHTML = 'my <div>test</div>FOO';
+    contentDiv.innerHTML = 'my <span>test</span>FOO';
     abbrFill({
       'selector': 'div',
       'terms': { 'FOO': 'bar' }
@@ -52,7 +52,7 @@ describe('tags', function () {
   });
 
   it('should match terms immediately before closing tags', function () {
-    contentDiv.innerHTML = 'my <div>test FOO</div>';
+    contentDiv.innerHTML = 'my <span>test FOO</span>';
     abbrFill({
       'selector': 'div',
       'terms': { 'FOO': 'bar' }
@@ -66,7 +66,7 @@ describe('tags', function () {
   });
 
   it('should match terms wrapped in an element', function () {
-    contentDiv.innerHTML = 'my <div>FOO</div> test';
+    contentDiv.innerHTML = 'my <span>FOO</span> test';
     abbrFill({
       'selector': 'div',
       'terms': { 'FOO': 'bar' }
