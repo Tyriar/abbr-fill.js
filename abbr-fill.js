@@ -1,6 +1,6 @@
 /*! abbr-fill.js | (c) 2014 Daniel Imms | github.com/Tyriar/abbr-fill.js/blob/master/LICENSE */
 
-var abbrFill = (function () {
+var abbrFill = (function (findAndWrap) {
   'use strict';
 
   var config;
@@ -43,4 +43,4 @@ var abbrFill = (function () {
   }
 
   return init;
-})();
+})(findAndWrap);
