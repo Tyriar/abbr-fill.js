@@ -92,13 +92,13 @@ var abbrFill = (function () {
 
     do {
       switch (child.nodeType) {
-      case 1: // Node.ELEMENT_NODE
+      case Node.ELEMENT_NODE:
         if (excludeElements.indexOf(child.tagName.toLowerCase()) > -1) {
           continue;
         }
         matchText(child, regex, callback, excludeElements);
         break;
-      case 3: // Node.TEXT_NODE
+      case Node.TEXT_NODE:
         child.data.replace(regex, replaceFunction);
         break;
       }
