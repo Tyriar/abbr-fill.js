@@ -10,11 +10,14 @@ module.exports = function(grunt) {
     dist: 'dist'
   });
 
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.config('copy', {
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.config('concat', {
     dist: {
       files: {
-        'dist/abbr-fill.js': 'abbr-fill.js'
+        'dist/abbr-fill.js': [
+          'find-and-wrap.js',
+          'abbr-fill.js'
+        ]
       }
     }
   });
@@ -37,7 +40,7 @@ module.exports = function(grunt) {
     dist: {
       files: {
         'dist/abbr-fill.min.js': [
-          'abbr-fill.js'
+          'dist/abbr-fill.js'
         ]
       }
     }
@@ -45,11 +48,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dist', [
     'clean:dist',
-    'copy:dist',
+    'concat:dist',
     'uglify:dist'
   ]);
 
   grunt.registerTask('test', [
+    'dist',
     'jasmine:test',
   ]);
 
