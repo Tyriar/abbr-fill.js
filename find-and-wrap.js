@@ -36,14 +36,14 @@ var findAndWrap = (function () {
 
     do {
       switch (child.nodeType) {
-      case 1:
+      case Node.ELEMENT_NODE:
         if (excludeElements.indexOf(child.tagName.toLowerCase()) > -1) {
           continue;
         }
         elements = elements.concat(
             matchText(child, term, regex, wrappingTagName));
         break;
-      case 3: // text node
+      case Node.TEXT_NODE:
         child.data.replace(regex, replaceFunction);
         break;
       }
