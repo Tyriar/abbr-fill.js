@@ -2,7 +2,7 @@
   "name": "abbr-fill",
   "version": "0.1.0",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt && grunt test"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

@@ -22,6 +22,15 @@ Efficiently wraps acronyms/abbreviations in `abbr` tags with their relevant `tit
       }
     });
 
+## Building
+
+    npm install
+    grunt
+
+## Testing
+
+    grunt test
+
 ## See also
 
 - [abbr-touch.js][1]
