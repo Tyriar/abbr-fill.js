@@ -7,29 +7,35 @@ Efficiently wraps acronyms/abbreviations in `abbr` tags with their relevant `tit
 
 ## Usage
 
-    abbrFill({
-      // Executes the script for each element matching the selector
-      'selector': 'article',
-      // An array of terms to create <abbr> elements for
-      'terms': {
-        'XML': 'Extensible Markup Language',
-        'HTML': 'HyperText Markup Language',
-        'SEO': 'Search Engine Optimisation',
-        'WCAG': 'Web Content Accessibility Guidelines',
-        'W3C': 'World Wide Web Consortium',
-        'URL': 'Uniform Resource Locator',
-        'URLs': 'Uniform Resource Locators'
-      }
-    });
+```javascript
+abbrFill({
+  // Executes the script for each element matching the selector
+  'selector': 'article',
+  // An array of terms to create <abbr> elements for
+  'terms': {
+    'XML': 'Extensible Markup Language',
+    'HTML': 'HyperText Markup Language',
+    'SEO': 'Search Engine Optimisation',
+    'WCAG': 'Web Content Accessibility Guidelines',
+    'W3C': 'World Wide Web Consortium',
+    'URL': 'Uniform Resource Locator',
+    'URLs': 'Uniform Resource Locators'
+  }
+});
+```
 
 ## Building
 
-    npm install
-    grunt
+```bash
+npm install
+grunt
+```
 
 ## Testing
 
-    grunt test
+```bash
+grunt test
+```
 
 ## See also
 
