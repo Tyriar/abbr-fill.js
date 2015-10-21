@@ -46,6 +46,19 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-eslint');
+  grunt.config('eslint', {
+    dist: {
+      options: {
+        configFile: '.eslintrc',
+      },
+      src: [
+        'abbr-fill.js.js',
+        'find-and-wrap.js'
+      ]
+    }
+  });
+
   grunt.registerTask('dist', [
     'clean:dist',
     'concat:dist',
@@ -57,6 +70,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'dist'
+    'dist',
+    'eslint',
+    'jasmine:test'
   ]);
 };
