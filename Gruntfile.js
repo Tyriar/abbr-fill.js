@@ -66,12 +66,12 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('test', [
+    'eslint',
     'jasmine:test',
   ]);
 
   grunt.registerTask('default', [
     'dist',
-    'eslint',
-    'jasmine:test'
+    'test'
   ]);
 };

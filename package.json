@@ -1,9 +1,26 @@
 {
   "name": "abbr-fill",
   "version": "0.1.0",
+  "description": "Efficiently wraps acronyms/abbreviations in `abbr` tags with their relevant `title` attributes",
+  "main": "abbr-fill.js",
   "scripts": {
-    "test": "grunt && grunt test"
+    "test": "grunt"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tyriar/abbr-fill.js.git"
+  },
+  "keywords": [
+    "abbr",
+    "accessibility",
+    "html"
+  ],
+  "author": "Daniel Imms (http://www.growingwiththeweb.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tyriar/abbr-fill.js/issues"
+  },
+  "homepage": "https://github.com/Tyriar/abbr-fill",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
